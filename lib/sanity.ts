@@ -87,17 +87,23 @@ export async function getAllCategories(): Promise<Category[]> {
 export async function getCategoryBySlug(slug: string): Promise<Category> {
   return client.fetch(
     `*[_type == "category" && slug.current == $slug][0] { _id, title, slug, description }`,
-    { slug }
+    { slug },
+    { next: { tags: ['categories'] } }
   )
 }
 
 export async function getRelatedPosts(categoryIds: string[], excludeSlug: string): Promise<Post[]> {
   return client.fetch(
     `*[_type == "post" && count((categories[]._ref)[@ in $categoryIds]) > 0 && slug.current != $excludeSlug && defined(publishedAt)] | order(publishedAt desc)[0..2] { ${postFields} }`,
-    { categoryIds, excludeSlug }
+    { categoryIds, excludeSlug },
+    { next: { tags: ['posts'] } }
   )
 }
 
 export async function getAuthor(): Promise<Author> {
-  return client.fetch(`*[_type == "author"][0] { _id, name, bio, photo, social }`)
+  return client.fetch(
+    `*[_type == "author"][0] { _id, name, bio, photo, social }`,
+    {},
+    { next: { tags: ['author'] } }
+  )
 }
