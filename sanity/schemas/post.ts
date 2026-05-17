@@ -19,7 +19,7 @@ export default defineType({
       name: 'coverImage',
       type: 'image',
       options: { hotspot: true },
-      fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+      fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule: any) => Rule.required() }],
     }),
     defineField({ name: 'body', type: 'blockContent' }),
     defineField({ name: 'featured', type: 'boolean', initialValue: false }),
