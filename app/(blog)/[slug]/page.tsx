@@ -4,6 +4,8 @@ import { HeroSection } from '@/components/post/HeroSection'
 import { PostBody } from '@/components/post/PostBody'
 import { AuthorCard } from '@/components/post/AuthorCard'
 import { RelatedPosts } from '@/components/post/RelatedPosts'
+import { MeltingCandle } from '@/components/ui/MeltingCandle'
+import { AskAuthorButton } from '@/components/ask-author/AskAuthorButton'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -37,6 +39,8 @@ export default async function PostPage({ params }: Props) {
         {post.author && <AuthorCard author={post.author} />}
       </div>
       <RelatedPosts posts={related} />
+      <MeltingCandle />
+      <AskAuthorButton />
     </article>
   )
 }
