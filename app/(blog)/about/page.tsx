@@ -30,7 +30,7 @@ export default async function AboutPage() {
           </div>
         )}
         <div>
-          <p className="font-inter text-[12px] uppercase tracking-[0.2em] text-accent-gold mb-4">Hello, I'm</p>
+          <p className="font-inter text-[12px] uppercase tracking-[0.2em] text-accent-gold mb-4">Hello, I&apos;m</p>
           <h1 className="font-playfair text-5xl font-bold text-text-primary mb-6">
             {author?.name ?? 'Kritika Sharma'}
           </h1>

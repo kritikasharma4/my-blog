@@ -5,7 +5,7 @@ import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll'
 import type { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -14,15 +14,17 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const category = await getCategoryBySlug(params.slug)
+  const { slug } = await params
+  const category = await getCategoryBySlug(slug)
   if (!category) return {}
   return { title: category.title, description: category.description }
 }
 
 export default async function CategoryPage({ params }: Props) {
+  const { slug } = await params
   const [category, posts] = await Promise.all([
-    getCategoryBySlug(params.slug),
-    getPostsByCategory(params.slug),
+    getCategoryBySlug(slug),
+    getPostsByCategory(slug),
   ])
   if (!category) notFound()
 

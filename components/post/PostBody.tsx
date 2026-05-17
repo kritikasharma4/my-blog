@@ -1,11 +1,11 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText, PortableTextComponents } from '@portabletext/react'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity'
 import { PullQuote } from './PullQuote'
 
-const components = {
+const components: PortableTextComponents = {
   types: {
-    image: ({ value }: any) => (
+    image: ({ value }) => (
       <figure className="my-10 -mx-8 md:-mx-16">
         <div className="relative w-full aspect-[16/9]">
           <Image
@@ -25,28 +25,28 @@ const components = {
     ),
   },
   block: {
-    h2: ({ children }: any) => (
+    h2: ({ children }) => (
       <h2 className="font-playfair text-3xl font-semibold text-text-primary mt-14 mb-5 leading-snug">
         {children}
       </h2>
     ),
-    h3: ({ children }: any) => (
+    h3: ({ children }) => (
       <h3 className="font-playfair text-2xl font-medium text-accent-gold mt-10 mb-4">
         {children}
       </h3>
     ),
-    blockquote: ({ children }: any) => <PullQuote>{children}</PullQuote>,
-    normal: ({ children }: any) => (
+    blockquote: ({ children }) => <PullQuote>{children}</PullQuote>,
+    normal: ({ children }) => (
       <p className="font-lora text-[18px] text-text-primary leading-[1.85] mb-7">
         {children}
       </p>
     ),
   },
   marks: {
-    strong: ({ children }: any) => (
+    strong: ({ children }) => (
       <strong className="font-semibold text-accent-warm-white">{children}</strong>
     ),
-    em: ({ children }: any) => <em className="italic">{children}</em>,
+    em: ({ children }) => <em className="italic">{children}</em>,
   },
 }
 
@@ -57,7 +57,7 @@ interface Props {
 export function PostBody({ body }: Props) {
   return (
     <div className="max-w-reading mx-auto px-6">
-      <PortableText value={body as any} components={components} />
+      <PortableText value={body as Parameters<typeof PortableText>[0]['value']} components={components} />
     </div>
   )
 }

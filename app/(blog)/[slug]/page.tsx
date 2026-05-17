@@ -7,11 +7,12 @@ import { RelatedPosts } from '@/components/post/RelatedPosts'
 import type { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
   if (!post) return {}
   return {
     title: post.title,
@@ -21,11 +22,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
   if (!post) notFound()
 
   const categoryIds = post.categories?.map((c) => c._id) ?? []
-  const related = await getRelatedPosts(categoryIds, params.slug)
+  const related = await getRelatedPosts(categoryIds, slug)
 
   return (
     <article>

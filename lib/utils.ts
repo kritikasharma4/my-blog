@@ -13,11 +13,13 @@ export function formatDate(dateStr: string): string {
   }).format(new Date(dateStr))
 }
 
+type Block = { _type: string; children?: { text: string }[] }
+
 export function readTime(body: unknown[]): number {
   if (!body) return 1
-  const text = body
-    .filter((block: any) => block._type === 'block')
-    .map((block: any) => block.children?.map((c: any) => c.text).join('') ?? '')
+  const text = (body as Block[])
+    .filter((block) => block._type === 'block')
+    .map((block) => block.children?.map((c) => c.text).join('') ?? '')
     .join(' ')
   const words = text.split(/\s+/).filter(Boolean).length
   return Math.max(1, Math.ceil(words / 200))

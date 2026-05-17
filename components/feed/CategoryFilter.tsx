@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Category, Post } from '@/lib/sanity'
 import { cn } from '@/lib/utils'
-import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll'
 import { PostCard } from './PostCard'
 
 interface Props {
