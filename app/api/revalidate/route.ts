@@ -8,17 +8,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
   }
 
-  const body = await request.json()
-  const type = body._type as string
+  // Revalidate everything on any post/category change
+  revalidateTag('posts')
+  revalidateTag('categories')
+  revalidateTag('author')
 
-  if (type === 'post') {
-    revalidateTag('posts')
-    revalidateTag(`post-${body.slug?.current}`)
-  }
-  if (type === 'category') {
-    revalidateTag('categories')
-    revalidateTag(`category-${body.slug?.current}`)
+  try {
+    const body = await request.json()
+    const type = body._type as string
+    if (type === 'post' && body.slug?.current) {
+      revalidateTag(`post-${body.slug.current}`)
+    }
+    if (type === 'category' && body.slug?.current) {
+      revalidateTag(`category-${body.slug.current}`)
+    }
+  } catch {
+    // Body may be empty — that's fine, we already revalidated above
   }
 
-  return NextResponse.json({ revalidated: true, type })
+  return NextResponse.json({ revalidated: true })
 }
