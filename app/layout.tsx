@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { PageTransition } from '@/components/animations/PageTransition'
+import { ScrollProgress } from '@/components/ui/ScrollProgress'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${lora.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body className="bg-bg-base text-text-primary min-h-screen">
+        <ScrollProgress />
         <Navbar />
         <PageTransition>
           <main>{children}</main>
