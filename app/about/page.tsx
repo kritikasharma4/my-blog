@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { getAuthor, urlFor } from '@/lib/sanity'
+import { getAuthor } from '@/lib/sanity'
 import { AboutContent } from '@/components/layout/AboutContent'
 import type { Metadata } from 'next'
 

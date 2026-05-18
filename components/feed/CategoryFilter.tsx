@@ -11,8 +11,6 @@ interface Props {
   categories: Category[]
 }
 
-const allPills = [{ _id: '__all__', title: 'All', slug: { current: null } }] as const
-
 export function CategoryFilter({ posts, categories }: Props) {
   const [active, setActive] = useState<string | null>(null)
 

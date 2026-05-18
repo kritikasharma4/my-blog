@@ -1,6 +1,5 @@
 import { getAllPosts, getAllCategories } from '@/lib/sanity'
 import { CategoryFilter } from '@/components/feed/CategoryFilter'
-import { ScrollArrow } from '@/components/ui/ScrollArrow'
 import { HomeHero } from '@/components/layout/HomeHero'
 import type { Metadata } from 'next'
 
