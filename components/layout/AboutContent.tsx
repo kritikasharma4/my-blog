@@ -7,7 +7,7 @@ import { urlFor, type Author } from '@/lib/sanity'
 
 const CURRENTLY = {
   reading: 'Braiding Sweetgrass — Robin Wall Kimmerer',
-  listening: 'Cigarettes After Sex',
+  listening: 'Ambient playlists and lo-fi on quiet evenings',
   thinking: 'How stillness looks in motion',
 }
 
