@@ -31,7 +31,7 @@ export function extractTextFromPortableText(body: unknown[]): string {
 
 export async function embedText(text: string): Promise<number[]> {
   const response = await fetch(
-    'https://api-inference.huggingface.co/models/BAAI/bge-base-en-v1.5',
+    'https://router.huggingface.co/hf-inference/models/BAAI/bge-base-en-v1.5/pipeline/feature-extraction',
     {
       method: 'POST',
       headers: {
