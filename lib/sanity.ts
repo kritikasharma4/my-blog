@@ -102,7 +102,7 @@ export async function getRelatedPosts(categoryIds: string[], excludeSlug: string
 
 export async function getAuthor(): Promise<Author> {
   return client.fetch(
-    `*[_type == "author"][0] { _id, name, bio, photo, social }`,
+    `*[_type == "author" && name == "Kritika Sharma"][0] { _id, name, bio, photo, social }`,
     {},
     { next: { tags: ['author'] } }
   )
