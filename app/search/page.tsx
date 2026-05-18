@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
@@ -12,7 +12,7 @@ type Result = {
   similarity: number
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams()
   const initialQuery = searchParams.get('q') ?? ''
   const [query, setQuery] = useState(initialQuery)
@@ -129,5 +129,13 @@ export default function SearchPage() {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="pt-32 px-6 text-text-muted font-lora text-lg">Loading...</div>}>
+      <SearchContent />
+    </Suspense>
   )
 }
