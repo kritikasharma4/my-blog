@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       post_slug: slug,
       post_title: post.title,
       chunk_text: chunk,
-      embedding: JSON.stringify(embedding),
+      embedding,
     })
   }
 
