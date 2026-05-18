@@ -3,7 +3,6 @@ import { Playfair_Display, Lora, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { CustomCursor } from '@/components/ui/CustomCursor'
 import { PageTransition } from '@/components/animations/PageTransition'
 
 const playfair = Playfair_Display({
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${lora.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body className="bg-bg-base text-text-primary min-h-screen">
-        <CustomCursor />
         <Navbar />
         <PageTransition>
           <main>{children}</main>

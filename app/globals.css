@@ -37,10 +37,6 @@ body {
   color: var(--accent-warm-white);
 }
 
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button { cursor: none; }
-}
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
