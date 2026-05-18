@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { notFound } from 'next/navigation'
 import { getCategoryBySlug, getPostsByCategory, getAllCategories } from '@/lib/sanity'
 import { PostCard } from '@/components/feed/PostCard'
