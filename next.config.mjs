@@ -1,12 +1,9 @@
 import { createRequire } from 'module'
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 const require = createRequire(import.meta.url)
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const reactPath = path.dirname(require.resolve('react/package.json'))
-const reactDomPath = path.dirname(require.resolve('react-dom/package.json'))
+const reactDir = path.dirname(require.resolve('react/package.json'))
+const reactDomDir = path.dirname(require.resolve('react-dom/package.json'))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,11 +13,14 @@ const nextConfig = {
     ],
   },
   transpilePackages: ['next-sanity', 'sanity', '@sanity/ui', '@sanity/icons'],
-  webpack(config) {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      react: reactPath,
-      'react-dom': reactDomPath,
+  webpack(config, { isServer }) {
+    // Force client bundle to use same React instance — fixes useEffectEvent in Sanity v5
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        react: reactDir,
+        'react-dom': reactDomDir,
+      }
     }
     return config
   },
